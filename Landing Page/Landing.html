@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Landing.css">
+    <title>Adenike Poultry Farm</title>
+</head>
+<body>
+
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="#about">Add Production Records</a>
+            <a href="#contact">Add Sales Records</a>
+        </div>
+
+        <main class="container">
+
+          <h1 class="heading">View Records</h1>
+          <form action="" method="post" class="form_group">
+  
+            <div class="form_group">
+                <label for="records" class="form_group-lebel">Records</label>
+                  <select name="records" required>
+                      <option value="sales">Sales</option>
+                      <option value="production">Production</option>
+                  </select>
+            </div>
+                
+            <div>
+                  <label for="from" class="form_group-lebel">From</label><input type="date">
+                  <label for="to" class="form_group-lebel">To</label><input type="date">     
+            </div>
+
+            <div>
+                  <button type="submit" class="button">Show Records</button>   
+            </div>
+          </form>
+        </main>
+    
+</body>
+</html>
+
+<!-- https://www.w3schools.com/howto/howto_css_searchbar.asp -->

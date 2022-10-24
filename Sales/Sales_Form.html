@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="./Sales_Form.css">
+    <title>Sales Records</title>
+
+    <script type="text/javascript">
+        function script()
+        {
+            var x = document.getElementById("price").value;
+            var y = document.getElementById("sales").value;
+            document.getElementById("revenue").value = x*y;
+        }
+    </script>
+</head>
+
+<body>
+    <main class="container">
+        <h1 class="form_heading">
+            Sales Records
+        </h1>
+        <form action="" method="post" class="form">
+            <div class="form_group">
+                <label for="date" class="form_group-lebel">Date</label>
+                <input type="date"
+                name="date"
+                id="date"
+                class="date"
+                placeholder="date"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="number" class="form_group-lebel">Available Stock (crates)</label>
+                <input type="number"
+                name="stock"
+                id="stock"
+                class="stock"
+                placeholder="available stock"
+                required>
+            </div>
+        
+            <div class="form_group">
+                <label for="price" class="form_group-lebel">Price per Crate (in naira)</label>
+                <input type="number"
+                name="price"
+                id="price"
+                class="price"
+                placeholder="price"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="number" class="form_group-lebel">Sales (crates)</label>
+                <input type="number"
+                name="sales"
+                id="sales"
+                class="sales"
+                placeholder="sales"
+                required
+                oninput="script()">
+            </div>
+
+            
+            <div class="form_group">
+                <label for="revenue" class="form_group-lebel">Total Revenue (in naira)</label>
+                <input type="number"
+                name="revenue"
+                id="revenue"
+                class="revenue"
+                placeholder="total revenue"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="balance" class="form_group-lebel">Outstanding Balance (Naira)</label>
+                <input type="number"
+                name="balance"
+                id="balance"
+                class="balance"
+                placeholder="Outstanding balance"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="Payment" class="form_group-lebel">Balance Payment (Naira)</label>
+                <input type="number"
+                name="Payment"
+                id="Payment"
+                class="Payment"
+                placeholder="Balance Payment"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="Cash" class="form_group-lebel">Cash Transfer to Production (Naira)</label>
+                <input type="number"
+                name="Cash"
+                id="Cash"
+                class="Cash"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="deposit" class="form_group-lebel">Bank Deposit (Naira)</label>
+                <input type="number"
+                name="deposit"
+                id="deposit"
+                class="deposit"
+                placeholder="Outstanding balance"
+                required>
+            </div>
+
+            <div class="form_group">
+                <textarea
+                name="comment"
+                id="comment"
+                cols="10"
+                rows="3">Comment</textarea>
+            </div>
+
+            <div class="form_group">
+                <button class="button">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

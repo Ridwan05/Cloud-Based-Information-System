@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="./Production_Form.css">
+    <title>Production Records</title>
+
+    <script type="text/javascript">
+        function Crates()
+        {
+            var x = document.getElementById("numberofEggs").value;
+            var q = document.getElementById("cracks").value;
+            var m = x - q;
+            document.getElementById("crates").value = m/30;
+        }
+
+        function Script()
+        {
+            var y = document.getElementById("feeds").value;
+            var z = document.getElementById("feedPrice").value;
+            document.getElementById("feedCost").value = y * z;
+        }
+
+        // function Expense()
+        // {
+        //     var a = document.getElementById("feedCost").value;
+        //     var b = document.getElementById("expense").value;
+        //     document.getElementById("total_expense").value = a + b;
+        // }
+
+    </script>
+</head>
+
+<body>
+    <main class="container">
+        <h1 class="form_heading">
+            Production Records
+        </h1>
+        <form action="" name="production_records" method="post" class="form">
+            <div class="form_group">
+                <label for="date" class="form_group-lebel">Date</label>
+                <input type="date"
+                name="date"
+                id="date"
+                class="date"
+                placeholder="Date"
+                required>
+            </div>
+        
+            <div class="form_group">
+                <label for="number of birds" class="form_group-lebel">Numbers of Birds on Farm</label>
+                <input type="number"
+                name="number_of_birds"
+                id="number_of_birds"
+                class="number_of_birds"
+                placeholder="number of birds"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="feeds" class="form_group-lebel">Feeds (in bags)</label>
+                <input type="number"
+                name="feeds"
+                id="feeds"
+                class="feeds"
+                placeholder="Feeds"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="feed_price" class="form_group-lebel">Feed Price per bag (in naira)</label>
+                <input type="number"
+                name="feed_price"
+                id="feedPrice"
+                class="feed_price"
+                placeholder="Feed Price"
+                oninput="Script()"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="feed_cost" class="form_group-lebel">Cost of Feeds (Naira)</label>
+                <input type="number"
+                name="feed_cost"
+                id="feedCost"
+                class="feed_cost"
+                placeholder="Feed Cost"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="payable" class="form_group-lebel">Payable to Suppliers (Naira)</label>
+                <input type="number"
+                name="payable"
+                id="payable"
+                class="payable"
+                placeholder="payable"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="expense" class="form_group-lebel">Other Expense (Naira)</label>
+                <input type="number"
+                name="expense"
+                id="expense"
+                class="expense"
+                placeholder="other expense"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="total_expense" class="form_group-lebel">Total Expense (Naira)</label>
+                <input type="number"
+                name="total_expense"
+                id="total_expense"
+                class="total_expense"
+                placeholder="total expense"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="number of eggs produced" class="form_group-lebel">Numbers of Eggs Produced</label>
+                <input type="number"
+                name="number_of_eggs"
+                id="numberofEggs"
+                class="number_of_eggs"
+                placeholder="number of eggs"
+                required>
+            </div>
+
+            <div class="form_group">
+                <label for="cracks" class="form_group-lebel">Numbers of Cracks</label>
+                <input type="number"
+                name="cracks"
+                id="cracks"
+                class="cracks"
+                placeholder="numbers of cracks"
+                oninput="Crates()"
+                required>
+            </div>
+        
+            <div class="form_group">
+                <label for="crates" class="form_group-lebel">Numbers of Crates</label>
+                <input type="number"
+                name="crates"
+                id="crates"
+                class="crates"
+                placeholder="number of crates"
+                required>
+            </div>
+        
+        
+            <div class="form_group">
+                <label for="mortality" class="form_group-lebel">Mortality</label>
+                <input type="number"
+                name="mortality"
+                id="mortality"
+                class="mortalty"
+                placeholder="mortality"
+                required>
+            </div>
+
+            <div class="form_group">
+                <textarea
+                name="comment"
+                id="comment"
+                cols="10"
+                rows="3">Comment</textarea>
+            </div>
+
+            <div class="form_group">
+                <button class="button">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
