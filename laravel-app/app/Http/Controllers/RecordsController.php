@@ -11,9 +11,9 @@ class RecordsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        $rqRecord = $request->query('record', 'production');
+        $rqRecord = request()->query('record', 'production');
         $productionRecordsRequested = $rqRecord == 'production';
         $targetModel = $productionRecordsRequested
             ? ProductionRecord::query()
@@ -21,9 +21,12 @@ class RecordsController extends Controller
 
         $view = $productionRecordsRequested ? 'production' : 'sales';
 
-        $records = $targetModel->paginate(10);
+        $records = $targetModel
+            ->orderByDesc('date_recorded')
+            ->paginate(10)
+            ->withQueryString();
 
-        return view("records.{$view}", compact(
+        return view("records.index", compact(
             'records', 'rqRecord',
         ));
     }

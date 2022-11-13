@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductionRecordController;
 use App\Http\Controllers\RecordsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', RecordsController::class);
+Route::get('/', RecordsController::class)->name('home');
+
+Route::prefix('production-records')->name('production_records.')->group(function() {
+    Route::get('create', [ProductionRecordController::class, 'create'])
+        ->name('create');
+
+    Route::post('store', [ProductionRecordController::class, 'store'])
+        ->name('store');
+});

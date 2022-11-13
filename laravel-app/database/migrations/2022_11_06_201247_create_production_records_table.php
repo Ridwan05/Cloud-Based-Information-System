@@ -15,33 +15,53 @@ return new class extends Migration
     {
         Schema::create('production_records', function (Blueprint $table) {
             $table->id();
-            $table->date('date_recorded');
+            $table->date('date_recorded')->unique();
             $table->integer('number_of_birds', false, true);
-            $table->integer('feed_consumed_bags', false, true)
+            $table->decimal('feed_consumed_bags', 7, 2, true)
                 ->comment('Quantity of feed consumed for the day, measured in bags');
 
-            $table->decimal('price_per_bag', 12, 2, true)
+            $table->decimal('feed_price_per_bag', 12, 2, true)
                 ->comment('purchase price of each of the bags consumed');
+
+            $table->decimal('total_feed_cost', 12, 2, true)
+                ->comment('Total amount spent on feeds');
 
             $table->decimal('payable_to_supplier', 12, 2, true)
                 ->comment('Amount owed to suppliers for the day')
+                ->nullable()
                 ->default(0);
 
             $table->decimal('other_expenses', 12, 2, true)
                 ->comment('Other production expenses incurred outside feed cost')
+                ->nullable()
                 ->default(0);
 
             $table->decimal('total_expenses', 12, 2, true)
                 ->comment('Total amount expended in production for the day')
+                ->nullable()
                 ->default(0);
-
-            $table->integer('crates', false, true)
+                
+            $table->integer('units_of_eggs_produced', false, true)
+                ->comment('Unit of eggs produced for the day')
+                ->nullable()
+                ->default(0);
+                
+            $table->integer('crates_of_eggs_produced', false, true)
                 ->comment('Amount of crates of eggs produced for the day')
+                ->nullable()
+                ->default(0);
+                
+            $table->integer('number_of_cracked_eggs', false, true)
+                ->comment('Amount of cracked eggs produced for the day')
+                ->nullable()
+                ->default(0);
+                
+            $table->integer('bird_mortalities', false, true)
+                ->comment('Number of bird mortalities recorded for the day')
+                ->nullable()
                 ->default(0);
 
-            $table->integer('cracks', false, true)
-                ->comment('Amount of cracked eggs produced for the day')
-                ->default(0);
+            $table->string('comments', 5000)->nullable();
 
             $table->foreignId('user_id')
                 ->nullable()

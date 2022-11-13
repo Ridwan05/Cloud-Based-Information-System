@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <h3>WElcome!</h3>
+    @foreach ($records as $item)
+        
+    @endforeach
 @endsection
