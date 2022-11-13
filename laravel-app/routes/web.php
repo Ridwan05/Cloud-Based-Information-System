@@ -16,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::get('/', [AuthController::class, 'showLoginForm'])
+    ->name('login')
+    ->middleware('guest');
+
+    Route::post('login', [AuthController::class, 'authenticate'])
+    ->name('authenticate')
+    ->middleware('guest');
+
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/records', RecordsController::class)
@@ -33,4 +39,7 @@ Route::prefix('production-records')
 
         Route::post('store', [ProductionRecordController::class, 'store'])
             ->name('store');
+
+        Route::get('show/{id}', [ProductionRecordController::class, 'show'])
+            ->name('show');
     });

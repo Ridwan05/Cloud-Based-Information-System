@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <button class="button" type="submit" id="submit-button">LOGIN</button>
+            <button class="btn button" type="submit" id="submit-button">LOGIN</button>
         </div>
     </div>
 {!! Form::close() !!}

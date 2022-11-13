@@ -21,7 +21,7 @@
             'id' => $id,
             'placeholder' => $placeholder ?: false,
             'required' => boolval($required),
-            'class' => "form-control  {$class} "
+            'class' => "form-select  {$class} "
                 . ($errors->first($name) ? ' is-invalid' : ''),
         ]);
     !!}

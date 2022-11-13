@@ -16,7 +16,11 @@
                 <td>{{ number_format($record->number_of_birds) }}</td>
                 <td>{{ number_format($record->total_expenses) }}</td>
                 <td>{{ number_format($record->units_of_eggs_produced) }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ route('production_records.show', $record->id) }}" class="btn btn-sm">
+                        View
+                    </a>
+                </td>
             </tr>
         @endforeach
     </tbody>

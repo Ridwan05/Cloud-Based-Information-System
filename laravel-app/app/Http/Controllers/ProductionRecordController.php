@@ -47,7 +47,9 @@ class ProductionRecordController extends Controller
      */
     public function show($id)
     {
-        //
+        $record = ProductionRecord::findOrFail((int) $id);
+
+        return view('production_records.show', compact('record'));
     }
 
     /**
