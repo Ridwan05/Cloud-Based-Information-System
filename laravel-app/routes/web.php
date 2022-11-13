@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductionRecordController;
 use App\Http\Controllers\RecordsController;
 use Illuminate\Support\Facades\Route;
@@ -15,12 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', RecordsController::class)->name('home');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('production-records')->name('production_records.')->group(function() {
-    Route::get('create', [ProductionRecordController::class, 'create'])
-        ->name('create');
+Route::get('/records', RecordsController::class)
+    ->name('home')
+    ->middleware('auth');
 
-    Route::post('store', [ProductionRecordController::class, 'store'])
-        ->name('store');
-});
+Route::prefix('production-records')
+    ->name('production_records.')
+    ->middleware('auth')
+    ->group(function() {
+        Route::get('create', [ProductionRecordController::class, 'create'])
+            ->name('create');
+
+        Route::post('store', [ProductionRecordController::class, 'store'])
+            ->name('store');
+    });

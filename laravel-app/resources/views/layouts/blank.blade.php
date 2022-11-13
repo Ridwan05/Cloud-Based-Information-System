@@ -12,11 +12,9 @@
 </head>
 
 <body>
-    <x-nav />
     <div class="container">
         <div class="row">
             <div class="col-12 py-4">
-                <x-flash />
                 @yield('content')
             </div>
         </div>
