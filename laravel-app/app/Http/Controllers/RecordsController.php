@@ -14,12 +14,20 @@ class RecordsController extends Controller
     public function __invoke()
     {
         $rqRecord = request()->query('record', 'production');
+        $rqDateFrom = formatDateValue(request()->query('date_from', ''));
+        $rqDateTo = formatDateValue(request()->query('date_to', ''));
+
         $productionRecordsRequested = $rqRecord == 'production';
         $targetModel = $productionRecordsRequested
             ? ProductionRecord::query()
             : null;
 
-        $view = $productionRecordsRequested ? 'production' : 'sales';
+        if (!empty($rqDateFrom)) {
+            $targetModel->where('date_recorded', '>=', $rqDateFrom);
+        }
+        if (!empty($rqDateTo)) {
+            $targetModel->where('date_recorded', '<=', $rqDateTo);
+        }
 
         $records = $targetModel
             ->orderByDesc('date_recorded')
@@ -27,7 +35,7 @@ class RecordsController extends Controller
             ->withQueryString();
 
         return view("records.index", compact(
-            'records', 'rqRecord',
+            'records', 'rqRecord', 'rqDateFrom', 'rqDateTo'
         ));
     }
 }

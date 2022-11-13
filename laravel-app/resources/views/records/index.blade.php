@@ -1,6 +1,15 @@
 @extends('layouts.default')
 
 @section('content')
+    <div class="d-flex mb-3">
+        <div class="col-md-6">
+            <x-forms.records-filter
+                :record="$rqRecord"
+                :date-from="$rqDateFrom"
+                :date-to="$rqDateTo"
+            />
+        </div>
+    </div>
     <div class="card">
         @if ($records->total() == 0)
             <div class="card-body p-2">

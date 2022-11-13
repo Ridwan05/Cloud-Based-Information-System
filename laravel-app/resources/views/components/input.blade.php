@@ -8,16 +8,19 @@
     'step' => '',
     'cols' => '',
     'rows' => '',
+    'class' => '',
+    'containerClass' => '',
+    'value' => null,
 ])
 
-<div class="form_group">
+<div class="form_group {{ $containerClass }}">
     @if (!empty($label))
         {!! Form::label($name, $label, ['class' => 'form_group-lebel']); !!}
     @endif
     {!!
-        Form::$type($name, null, [
+        Form::$type($name, $value, [
             'id' => $id,
-            'class' => 'form-control '
+            'class' => "form-control {$class} "
                 . ($errors->first($name) ? ' is-invalid' : ''),
             'placeholder' => $label,
             'required' => boolval($required),
