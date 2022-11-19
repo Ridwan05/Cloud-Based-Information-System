@@ -47,7 +47,7 @@ class SalesRecordController extends Controller
      */
     public function show($id)
     {
-        $record = SalesRecord::findOrFail((int) $id);
+        $record = SalesRecord::with(['creator'])->findOrFail((int) $id);
         return view('sales_records.show', compact('record'));
     }
 }

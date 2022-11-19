@@ -62,6 +62,26 @@
                         <th>Comments</th>
                         <td>{{ $record->comments }}</td>
                     </tr>
+                    <tr>
+                        <th>Created</th>
+                        <td>
+                            {{ $record->creator->name }}
+                            <div class="small text-sm">
+                                ({{ $record->created_at->format('d/m/Y g:iA')}})
+                            </div>
+                        </td>
+                    </tr>
+                    @if (!empty($record->updated_by))
+                        <tr>
+                            <th>Updated</th>
+                            <td>
+                                {{ $record->updater->name }}
+                                <div class="small text-sm">
+                                    ({{ $record->updated_at->format('d/m/Y g:iA')}})
+                                </div>
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
