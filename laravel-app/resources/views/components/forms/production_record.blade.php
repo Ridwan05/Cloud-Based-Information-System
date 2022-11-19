@@ -1,11 +1,26 @@
-{!! Form::open([
-    'route' => 'production_records.store',
-    'id' => 'production-form',
-    'novalidate',
-]) !!}
+@props([
+    'record'
+])
+
+@if (empty($record->id))
+    {!! Form::open([
+        'route' => 'production_records.store',
+        'id' => 'production-form',
+        'novalidate',
+    ]) !!}
+
+@else
+    {!!
+        Form::model($record, [
+            'route' => ['production_records.update', $record->id],
+            'id' => 'production-form',
+            'novalidate',
+        ])
+    !!}
+@endif
 
     <div class="form_group">
-        <x-input name="date_recorded" label="Date" type="date" required />
+        <x-input name="date_recorded" label="Date" type="date" :value="!empty($record->id) ? $record->date_recorded->format('Y-m-d') : null" required />
     </div>
 
     <div class="form_group">
@@ -68,7 +83,6 @@ $(function() {
     let $btnSubmit = $('#submit-button')
     $("#production-form").validate({
         submitHandler: function(form) {
-            // do other things for a valid form
             $btnSubmit.attr('disabled', true)
             form.submit();
         },

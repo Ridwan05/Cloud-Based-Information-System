@@ -59,7 +59,8 @@ class ProductionRecordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $record = ProductionRecord::findOrFail((int) $id);
+        return view('production_records.edit', compact('record'));
     }
 
     /**
@@ -71,7 +72,19 @@ class ProductionRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $record = ProductionRecord::findOrFail((int) $id);
+        $validated = $request->validate(ProductionRecord::validationRules($id));
+        $record->fill($validated);
+
+        if ($record->save()) {
+            return redirect(route('production_records.show', ['id' => $record->id]))
+                ->with('status_success', 'Record saved successfully!');
+        }
+        
+        return redirect(route('production_records.edit', $id))
+            ->withInput()
+            ->with('status_error', 'Record not saved. Please, try again!');
+
     }
 
     /**

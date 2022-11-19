@@ -5,7 +5,7 @@
 ]) !!}
 
     <div class="form_group">
-        <x-input name="date_recorded" label="Date" type="date" required />
+        <x-input name="date_recorded" label="Date" type="date" :value="!empty($record->id) ? $record->date_recorded->format('Y-m-d') : null" required />
     </div>
 
     <div class="form_group">

@@ -35,14 +35,21 @@ Route::prefix('production-records')
     ->name('production_records.')
     ->middleware('auth')
     ->group(function() {
+
+        Route::get('show/{id}', [ProductionRecordController::class, 'show'])
+            ->name('show');
+
         Route::get('create', [ProductionRecordController::class, 'create'])
             ->name('create');
 
         Route::post('store', [ProductionRecordController::class, 'store'])
             ->name('store');
 
-        Route::get('show/{id}', [ProductionRecordController::class, 'show'])
-            ->name('show');
+        Route::get('edit/{id}', [ProductionRecordController::class, 'edit'])
+            ->name('edit');
+
+        Route::post('update/{id}', [ProductionRecordController::class, 'update'])
+            ->name('update');
     });
 
 
