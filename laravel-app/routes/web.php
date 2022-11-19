@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductionRecordController;
 use App\Http\Controllers\RecordsController;
+use App\Http\Controllers\SalesRecordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,5 +42,20 @@ Route::prefix('production-records')
             ->name('store');
 
         Route::get('show/{id}', [ProductionRecordController::class, 'show'])
+            ->name('show');
+    });
+
+
+Route::prefix('sales-records')
+    ->name('sales_records.')
+    ->middleware('auth')
+    ->group(function() {
+        Route::get('create', [SalesRecordController::class, 'create'])
+            ->name('create');
+
+        Route::post('store', [SalesRecordController::class, 'store'])
+            ->name('store');
+
+        Route::get('show/{id}', [SalesRecordController::class, 'show'])
             ->name('show');
     });

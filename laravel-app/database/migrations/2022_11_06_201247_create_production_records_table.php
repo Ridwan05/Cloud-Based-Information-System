@@ -60,15 +60,22 @@ return new class extends Migration
                 ->comment('Number of bird mortalities recorded for the day')
                 ->nullable()
                 ->default(0);
-
+    
             $table->string('comments', 5000)->nullable();
-
-            $table->foreignId('user_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
-            
+                
+            $table->bigInteger('created_by', false, true)->nullable();                
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
+                
+            $table->bigInteger('updated_by', false, true)->nullable();                
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
             
             $table->timestamps();
         });

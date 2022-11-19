@@ -6,11 +6,11 @@ use App\Models\Traits\RecordsCreatorAndUpdater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductionRecord extends Model
+class SalesRecord extends Model
 {
     use HasFactory;
     use RecordsCreatorAndUpdater;
-
+    
     /**
      * Guarded fields
      * 
@@ -28,5 +28,4 @@ class ProductionRecord extends Model
         'created_at' => 'datetime:Y-m-d',
         'updated_at' => 'datetime:Y-m-d',
     ];
-
 }

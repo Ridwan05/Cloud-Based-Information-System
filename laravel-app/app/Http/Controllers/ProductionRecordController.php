@@ -35,7 +35,7 @@ class ProductionRecordController extends Controller
                 ->with('status_error', 'Record not saved. Please, try again!');
         }
 
-        return redirect(route('home')) // To do: redirect to a view page
+        return redirect(route('production_records.show', ['id' => $record->id]))
             ->with('status_success', 'Record saved successfully!');
     }
 
@@ -48,7 +48,6 @@ class ProductionRecordController extends Controller
     public function show($id)
     {
         $record = ProductionRecord::findOrFail((int) $id);
-
         return view('production_records.show', compact('record'));
     }
 

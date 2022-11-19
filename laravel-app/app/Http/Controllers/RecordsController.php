@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductionRecord;
+use App\Models\SalesRecord;
 use Illuminate\Http\Request;
 
 class RecordsController extends Controller
@@ -20,7 +21,7 @@ class RecordsController extends Controller
         $productionRecordsRequested = $rqRecord == 'production';
         $targetModel = $productionRecordsRequested
             ? ProductionRecord::query()
-            : null;
+            : SalesRecord::query();
 
         if (!empty($rqDateFrom)) {
             $targetModel->where('date_recorded', '>=', $rqDateFrom);
@@ -35,7 +36,7 @@ class RecordsController extends Controller
             ->withQueryString();
 
         return view("records.index", compact(
-            'records', 'rqRecord', 'rqDateFrom', 'rqDateTo'
+            'records', 'rqRecord', 'rqDateFrom', 'rqDateTo', 'productionRecordsRequested'
         ));
     }
 }

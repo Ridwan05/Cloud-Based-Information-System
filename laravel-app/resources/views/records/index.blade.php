@@ -19,7 +19,7 @@
             </div>
         @else
             @include(
-                $rqRecord == 'production'
+                $productionRecordsRequested
                     ? 'partials.production_records'
                     : 'partials.sales_records'
             )

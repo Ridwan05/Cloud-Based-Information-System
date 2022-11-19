@@ -2,9 +2,9 @@
     <div class="me-auto">
         <a class="active" href="/">Home</a>
         <a href="{{ route('production_records.create') }}">Add Production Records</a>
-        <a href="#contact">Add Sales Records</a>
+        <a href="{{ route('sales_records.create') }}">Add Sales Records</a>
     </div>
-    <a href="#contact" onclick="document.querySelector('#logout-form').submit()">
+    <a href="#" onclick="document.querySelector('#logout-form').submit()">
         logout
     </a>
 </div>
