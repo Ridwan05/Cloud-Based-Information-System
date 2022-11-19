@@ -57,12 +57,18 @@ Route::prefix('sales-records')
     ->name('sales_records.')
     ->middleware('auth')
     ->group(function() {
+        Route::get('show/{id}', [SalesRecordController::class, 'show'])
+            ->name('show');
+
         Route::get('create', [SalesRecordController::class, 'create'])
             ->name('create');
 
         Route::post('store', [SalesRecordController::class, 'store'])
             ->name('store');
 
-        Route::get('show/{id}', [SalesRecordController::class, 'show'])
-            ->name('show');
+        Route::get('edit/{id}', [SalesRecordController::class, 'edit'])
+            ->name('edit');
+
+        Route::post('update/{id}', [SalesRecordController::class, 'update'])
+            ->name('update');
     });

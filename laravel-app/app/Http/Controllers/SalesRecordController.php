@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveSalesRecordRequest;
+use App\Models\ProductionRecord;
 use App\Models\SalesRecord;
 use Illuminate\Http\Request;
 
@@ -49,5 +50,41 @@ class SalesRecordController extends Controller
     {
         $record = SalesRecord::with(['creator'])->findOrFail((int) $id);
         return view('sales_records.show', compact('record'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $record = SalesRecord::findOrFail((int) $id);
+        return view('sales_records.edit', compact('record'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $record = SalesRecord::findOrFail((int) $id);
+        $validated = $request->validate(SalesRecord::validationRules());
+        $record->fill($validated);
+
+        if ($record->save()) {
+            return redirect(route('sales_records.show', ['id' => $record->id]))
+                ->with('status_success', 'Record saved successfully!');
+        }
+        
+        return redirect(route('sales_records.edit', $id))
+            ->withInput()
+            ->with('status_error', 'Record not saved. Please, try again!');
+
     }
 }

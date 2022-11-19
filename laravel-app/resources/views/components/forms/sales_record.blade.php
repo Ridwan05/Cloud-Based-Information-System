@@ -1,8 +1,23 @@
-{!! Form::open([
-    'route' => 'sales_records.store',
-    'id' => 'sales-form',
-    'novalidate',
-]) !!}
+@props([
+    'record'
+])
+
+@if (empty($record->id))
+    {!! Form::open([
+        'route' => 'sales_records.store',
+        'id' => 'sales-form',
+        'novalidate',
+    ]) !!}
+
+@else
+    {!!
+        Form::model($record, [
+            'route' => ['sales_records.update', $record->id],
+            'id' => 'sales-form',
+            'novalidate',
+        ])
+    !!}
+@endif
 
     <div class="form_group">
         <x-input name="date_recorded" label="Date" type="date" :value="!empty($record->id) ? $record->date_recorded->format('Y-m-d') : null" required />

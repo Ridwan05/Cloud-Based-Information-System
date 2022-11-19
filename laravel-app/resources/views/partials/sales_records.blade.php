@@ -20,6 +20,9 @@
                     <a href="{{ route('sales_records.show', $record->id) }}" class="btn btn-sm">
                         View
                     </a>
+                    <a href="{{ route('sales_records.edit', $record->id) }}" class="btn btn-sm">
+                        Edit
+                    </a>
                 </td>
             </tr>
         @endforeach

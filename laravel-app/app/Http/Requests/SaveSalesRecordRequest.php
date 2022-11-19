@@ -24,17 +24,6 @@ class SaveSalesRecordRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'date_recorded' => 'required|date|before_or_equal:today',
-            'available_stock' => 'required|integer|min:1|max:999999',
-            'price_per_crate' => 'required|numeric|min:1|max:999999',
-            'crates_sold' => 'required|integer|min:1|max:999999',
-            'total_revenue' => 'required|numeric|min:1|max:999999',
-            'outstanding_balance' => 'required|numeric|min:1|max:999999',
-            'balance_payment' => 'required|numeric|min:1|max:999999',
-            'cash_transfer_to_production' => 'required|numeric|min:1|max:999999',
-            'bank_deposit' => 'required|numeric|min:1|max:999999',
-            'comments' => 'nullable|string|max:1000',
-        ];
+        return SalesRecord::validationRules();
     }
 }
