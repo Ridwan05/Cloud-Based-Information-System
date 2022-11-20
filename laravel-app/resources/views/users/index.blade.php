@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex align-items-center">
         <h2 class="flex-grow-1">Users</h2>
-        <a href="#" class="btn button">
+        <a href="{{ route('users.create') }}" class="btn button">
             Add User
         </a>
     </div>
@@ -20,6 +20,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Role</th>
+                        <th>Email</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                                 @endif
                             </td>
                             <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
+                            <td>{{ $user->email }}</td>
                             <td class="text-end">
 
                             </td>

@@ -93,4 +93,10 @@ Route::prefix('users')
     ->group(function() {
         Route::get('index', [UserController::class, 'index'])
             ->name('index');
+
+        Route::get('create', [UserController::class, 'create'])
+            ->name('create');
+
+        Route::post('store', [UserController::class, 'store'])
+            ->name('store');
     });

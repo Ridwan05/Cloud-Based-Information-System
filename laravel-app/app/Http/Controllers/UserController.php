@@ -18,4 +18,37 @@ class UserController extends Controller
 
         return view('users.index', compact('users'));
     }
+
+    /**
+     * Display the form for registering users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    /**
+     * Handle submission of user creation form
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $userData = $request->validate(User::validationRules());
+        $userData['is_admin'] = (bool) request('is_admin');
+
+        $user = User::create($userData);
+
+        if (empty($user->id)) {
+            return redirect(route('users.create'))
+                ->withInput()
+                ->with('status_error', 'User not saved. Please, try again!');
+        }
+
+        return redirect(route('users.index'))
+            ->with('status_success', 'User saved successfully!');
+    }
 }

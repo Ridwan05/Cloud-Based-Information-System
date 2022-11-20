@@ -26,6 +26,20 @@
     <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="{{ asset('/js/jquery-validator-defaults.js') }}"></script>
+    <script>
+        $(function() {
+            jQuery.validator.setDefaults({
+                errorElement: 'div',
+                errorClass: 'invalid-feedback',
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid').removeClass('is-valid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid').addClass('is-valid');
+                },
+            });
+        })
+    </script>
     @yield('bottom-scripts')
     <x-confirmation-modal />
 </body>
