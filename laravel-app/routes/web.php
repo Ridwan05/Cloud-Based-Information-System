@@ -50,6 +50,9 @@ Route::prefix('production-records')
 
         Route::post('update/{id}', [ProductionRecordController::class, 'update'])
             ->name('update');
+
+        Route::delete('delete/{id}', [ProductionRecordController::class, 'destroy'])
+            ->name('destroy');
     });
 
 

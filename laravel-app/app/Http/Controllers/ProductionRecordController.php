@@ -95,6 +95,14 @@ class ProductionRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = ProductionRecord::findOrFail((int) $id);
+
+        if ($record->delete()) {
+            return redirect(route('home'))
+                ->with('status_success', 'Production record deleted successfully!');
+        }
+
+        return redirect()->back()
+                ->with('status_error', 'Production record was not deleted. Please, try again!');
     }
 }

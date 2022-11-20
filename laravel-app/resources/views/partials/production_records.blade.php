@@ -23,8 +23,43 @@
                     <a href="{{ route('production_records.edit', $record->id) }}" class="btn btn-sm">
                         Edit
                     </a>
+                    {!! Form::open([
+                        'class' => 'inline delete-form',
+                        'method' => 'DELETE',
+                        'url' => route('production_records.destroy', $record->id),
+                        'data-id' => $record->id,
+                    ]) !!}
+                        <button
+                            class="btn btn-sm"
+                            type="submit"
+                        >
+                            Delete
+                        </button>
+                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<script>
+window.addEventListener('load', () => {
+    let confirmed = null
+    $('.delete-form').on('submit', event => {
+        if (confirmed) {
+            return
+        }
+        event.preventDefault()
+        document.dispatchEvent(new CustomEvent('confirm', {
+            detail: {
+                action: () => {
+                    console.log('Original event', event)
+                    confirmed = $(event.target).attr('data-id')
+                    event.target.submit()
+                    // document.dispatchEvent(event.originalEvent)
+                }
+            }
+        }))
+    })
+})
+</script>
