@@ -53,10 +53,8 @@ window.addEventListener('load', () => {
         document.dispatchEvent(new CustomEvent('confirm', {
             detail: {
                 action: () => {
-                    console.log('Original event', event)
                     confirmed = $(event.target).attr('data-id')
                     event.target.submit()
-                    // document.dispatchEvent(event.originalEvent)
                 }
             }
         }))

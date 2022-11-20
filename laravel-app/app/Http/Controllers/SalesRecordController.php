@@ -87,4 +87,23 @@ class SalesRecordController extends Controller
             ->with('status_error', 'Record not saved. Please, try again!');
 
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $record = SalesRecord::findOrFail((int) $id);
+
+        if ($record->delete()) {
+            return redirect(route('home'))
+                ->with('status_success', 'Sales record deleted successfully!');
+        }
+
+        return redirect()->back()
+                ->with('status_error', 'Sales record was not deleted. Please, try again!');
+    }
 }

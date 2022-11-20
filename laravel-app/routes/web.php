@@ -74,4 +74,7 @@ Route::prefix('sales-records')
 
         Route::post('update/{id}', [SalesRecordController::class, 'update'])
             ->name('update');
+
+        Route::delete('delete/{id}', [SalesRecordController::class, 'destroy'])
+            ->name('destroy');
     });
