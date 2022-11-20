@@ -55,3 +55,16 @@ if (!function_exists('formatDateValue')) {
         return null;
     }
 }
+
+if (!function_exists('authUserIsAdmin')) {
+
+    /**
+     * Determine if an admin user is logged in
+     * 
+     * @return bool
+     */
+    function authUserIsAdmin(): bool
+    {
+        return auth()->check() && !empty(auth()->user()->is_admin);
+    }
+}

@@ -46,13 +46,16 @@ Route::prefix('production-records')
             ->name('store');
 
         Route::get('edit/{id}', [ProductionRecordController::class, 'edit'])
-            ->name('edit');
+            ->name('edit')
+            ->middleware('admin');
 
         Route::post('update/{id}', [ProductionRecordController::class, 'update'])
-            ->name('update');
+            ->name('update')
+            ->middleware('admin');
 
         Route::delete('delete/{id}', [ProductionRecordController::class, 'destroy'])
-            ->name('destroy');
+            ->name('destroy')
+            ->middleware('admin');
     });
 
 
@@ -70,11 +73,14 @@ Route::prefix('sales-records')
             ->name('store');
 
         Route::get('edit/{id}', [SalesRecordController::class, 'edit'])
-            ->name('edit');
+            ->name('edit')
+            ->middleware('admin');
 
         Route::post('update/{id}', [SalesRecordController::class, 'update'])
-            ->name('update');
+            ->name('update')
+            ->middleware('admin');
 
         Route::delete('delete/{id}', [SalesRecordController::class, 'destroy'])
-            ->name('destroy');
+            ->name('destroy')
+            ->middleware('admin');
     });
