@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductionRecordController;
 use App\Http\Controllers\RecordsController;
 use App\Http\Controllers\SalesRecordController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,4 +84,13 @@ Route::prefix('sales-records')
         Route::delete('delete/{id}', [SalesRecordController::class, 'destroy'])
             ->name('destroy')
             ->middleware('admin');
+        });
+    
+    
+Route::prefix('users')
+    ->name('users.')
+    ->middleware('auth')
+    ->group(function() {
+        Route::get('index', [UserController::class, 'index'])
+            ->name('index');
     });

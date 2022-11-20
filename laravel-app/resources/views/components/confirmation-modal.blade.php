@@ -9,7 +9,7 @@
                 <p>Are sure you want to do this?</p>
             </div>
             <div class="modal-footer" id="cm-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn button" data-bs-dismiss="modal">No</button>
                 <button type="button" class="btn btn-secondary" id="cm-btn-yes">Yes</button>
             </div>
         </div>

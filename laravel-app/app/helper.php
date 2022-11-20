@@ -68,3 +68,24 @@ if (!function_exists('authUserIsAdmin')) {
         return auth()->check() && !empty(auth()->user()->is_admin);
     }
 }
+
+if (!function_exists('isAuthUser')) {
+
+    /**
+     * Determine if indicated user is the current authenticated user
+     *
+     * @param \App\Models\User $user
+     * @return boolean
+     */
+    function isAuthUser($user): bool
+    {
+        if (
+            !isset($user->id)
+            || !auth()->check()
+        ) {
+            return false;
+        }
+
+        return auth()->id() == $user->id;
+    }
+}
