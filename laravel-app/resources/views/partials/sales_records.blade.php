@@ -20,22 +20,24 @@
                     <a href="{{ route('sales_records.show', $record->id) }}" class="btn btn-sm">
                         View
                     </a>
-                    <a href="{{ route('sales_records.edit', $record->id) }}" class="btn btn-sm">
-                        Edit
-                    </a>
-                    {!! Form::open([
-                        'class' => 'inline delete-form',
-                        'method' => 'DELETE',
-                        'url' => route('sales_records.destroy', $record->id),
-                        'data-id' => $record->id,
-                    ]) !!}
-                        <button
-                            class="btn btn-sm"
-                            type="submit"
-                        >
-                            Delete
-                        </button>
-                    {!! Form::close() !!}
+                    @if (authUserIsAdmin())
+                        <a href="{{ route('sales_records.edit', $record->id) }}" class="btn btn-sm">
+                            Edit
+                        </a>
+                        {!! Form::open([
+                            'class' => 'inline delete-form',
+                            'method' => 'DELETE',
+                            'url' => route('sales_records.destroy', $record->id),
+                            'data-id' => $record->id,
+                        ]) !!}
+                            <button
+                                class="btn btn-sm"
+                                type="submit"
+                            >
+                                Delete
+                            </button>
+                        {!! Form::close() !!}
+                    @endif
                 </td>
             </tr>
         @endforeach
