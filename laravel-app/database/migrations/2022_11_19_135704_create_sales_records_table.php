@@ -21,25 +21,25 @@ return new class extends Migration
                 ->comment('Quantity of eggs in stock, measured in crates')
                 ->default(0);
 
-            $table->decimal('price_per_crate', 7, 2, true)
+            $table->decimal('price_per_crate', 10, 2, true)
                 ->comment('Selling price of each crate');
 
             $table->integer('crates_sold', false, true)
                 ->comment('Quantity of crates of eggs sold');
 
-            $table->decimal('total_revenue', 7, 2, true)
+            $table->decimal('total_revenue', 12, 2, true)
                 ->comment('Amount received, in naira');
 
-            $table->decimal('outstanding_balance', 7, 2, true)
+            $table->decimal('outstanding_balance', 12, 2, true)
                 ->comment('Outstanding balance, in naira');
 
-            $table->decimal('balance_payment', 7, 2, true)
+            $table->decimal('balance_payment', 12, 2, true)
                 ->comment('Amount received as payment for debt, in naira');
 
-            $table->decimal('cash_transfer_to_production', 7, 2, true)
+            $table->decimal('cash_transfer_to_production', 12, 2, true)
                 ->comment('Amount returned for production, in naira');
 
-            $table->decimal('bank_deposit', 7, 2, true)
+            $table->decimal('bank_deposit', 12, 2, true)
                 ->comment('Amount deposited to the bank, in naira');
 
             $table->string('comments', 5000)->nullable();
