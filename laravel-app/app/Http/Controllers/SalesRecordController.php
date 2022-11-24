@@ -99,7 +99,7 @@ class SalesRecordController extends Controller
         $record = SalesRecord::findOrFail((int) $id);
 
         if ($record->delete()) {
-            return redirect(route('home'))
+            return redirect(route('records'))
                 ->with('status_success', 'Sales record deleted successfully!');
         }
 

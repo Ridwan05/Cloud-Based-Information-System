@@ -99,7 +99,7 @@ class ProductionRecordController extends Controller
         $record = ProductionRecord::findOrFail((int) $id);
 
         if ($record->delete()) {
-            return redirect(route('home'))
+            return redirect(route('records'))
                 ->with('status_success', 'Production record deleted successfully!');
         }
 

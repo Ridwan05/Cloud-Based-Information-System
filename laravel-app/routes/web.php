@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'showLoginForm'])
+Route::view('/', 'home')
+    ->name('home')
+    ->middleware('guest');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])
     ->name('login')
     ->middleware('guest');
 
@@ -29,7 +33,7 @@ Route::get('/', [AuthController::class, 'showLoginForm'])
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/records', RecordsController::class)
-    ->name('home')
+    ->name('records')
     ->middleware('auth');
 
 Route::prefix('production-records')
