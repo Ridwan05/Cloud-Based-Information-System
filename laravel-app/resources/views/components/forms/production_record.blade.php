@@ -83,11 +83,32 @@
     </div>
 
     <div class="form_group">
-        <x-input name="other_expenses" label="Other Expense (Naira)" type="number" min="0" step="0.01" />
+        <x-input
+            name="other_expenses"
+            id="other_expenses"
+            label="Other Expense (Naira)"
+            type="number"
+            min="0"
+            step="0.01"
+        />
     </div>
 
     <div class="form_group">
-        <x-input name="total_expenses" label="Total Expense (Naira)" type="number" min="1" step="0.01" required />
+        <x-input
+            name="total_expenses"
+            id="disabled_total_expenses"
+            label="Total Expense (Naira)"
+            type="number"
+            min="1"
+            step="0.01"
+            required
+            readonly
+            ariaReadonly
+        />
+        <x-input-hidden
+            name="total_expenses"
+            id="total_expenses"
+        />
     </div>
 
     <div class="form_group">
@@ -143,6 +164,10 @@ $(function() {
     let $inputTotalFeedCost = $('#disabled_total_feed_cost')
     let $hiddenInputTotalFeedCost = $('#total_feed_cost')
 
+    let $inputOtherExpense = $('#other_expenses')
+    let $inputTotalExpenses = $('#total_expenses')
+    let $disabledInputTotalExpenses = $('#disabled_total_expenses')
+
     const validator = $("#production-form").validate({
         submitHandler: function(form) {
             $btnSubmit.attr('disabled', true)
@@ -159,8 +184,8 @@ $(function() {
         rules: {
             number_of_birds: {
                 required: true,
-                // digits: true,
-                // min: 1,
+                digits: true,
+                min: 1,
                 // max: 999999,
             },
             feed_consumed_bags: {
@@ -181,11 +206,6 @@ $(function() {
             other_expenses: {
                 required: true,
                 min: 0,
-                max: 99999999,
-            },
-            total_expenses: {
-                required: true,
-                min: 1,
                 max: 99999999,
             },
             units_of_eggs_produced: {
@@ -223,11 +243,21 @@ $(function() {
         const totalFeedCost = (numberOfBags * pricePerBag).toFixed(2)
         $inputTotalFeedCost.val(totalFeedCost)
         $hiddenInputTotalFeedCost.val(totalFeedCost)
+        calculateTotalExpenses()
+    }
+
+    function calculateTotalExpenses() {
+        const totalFeedCost = Number($hiddenInputTotalFeedCost.val()) || 0
+        const otherExpenses = Number($inputOtherExpense.val()) || 0
+        const totalExpenses = (totalFeedCost + otherExpenses).toFixed(2)
+        $inputTotalExpenses.val(totalExpenses)
+        $disabledInputTotalExpenses.val(totalExpenses)
     }
 
     $inputNumberOfEggs.on('change keyup', () => calculateNumberOfCrates())
     $inputFeedConsumedBags.on('change keyup', () => calculateTotalFeedCost())
     $inputFeedPricePerBag.on('change keyup', () => calculateTotalFeedCost())
+    $inputOtherExpense.on('change keyup', () => calculateTotalFeedCost())
 
 })
 </script>
