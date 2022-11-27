@@ -28,15 +28,42 @@
     </div>
 
     <div class="form_group">
-        <x-input name="price_per_crate" label="Price per crate (in naira)" type="number" min="1" step="0.01" required />
+        <x-input
+            name="price_per_crate"
+            id="price_per_crate"
+            label="Price per crate (in naira)"
+            type="number"
+            min="1"
+            step="0.01"
+            required
+        />
     </div>
 
     <div class="form_group">
-        <x-input name="crates_sold" label="Sales (in naira)" type="number" min="1" step="0.01" required />
+        <x-input
+            name="crates_sold"
+            id="crates_sold"
+            label="Sales (in naira)"
+            type="number"
+            min="1"
+            required
+        />
     </div>
 
     <div class="form_group">
-        <x-input name="total_revenue" label="Total Revenue (in naira)" type="number" min="1" step="0.01" required />
+        <x-input
+            name="total_revenue"
+            id="disabled_total_revenue"
+            label="Total Revenue (in naira)"
+            type="number"
+            min="1"
+            step="0.01"
+            required
+        />
+        <x-input-hidden
+            name="total_revenue"
+            id="total_revenue"
+        />
     </div>
 
     <div class="form_group">
@@ -75,6 +102,11 @@ $(function() {
         max: 999999,
     }
 
+    let $inputPricePerCrate = $('#price_per_crate')
+    let $inputCratesSold = $('#crates_sold')
+    let $disabledInputTotalRevenue = $('#disabled_total_revenue')
+    let $inputTotalRevenue = $('#total_revenue')
+
     $("#sales-form").validate({
         submitHandler: function(form) {
             // do other things for a valid form
@@ -99,7 +131,6 @@ $(function() {
             },
             price_per_crate: {...quantityValidationRules},
             crates_sold: {...quantityValidationRules},
-            total_revenue: {...quantityValidationRules},
             outstanding_balance: {...quantityValidationRules},
             balance_payment: {...quantityValidationRules},
             cash_transfer_to_production: {
@@ -115,6 +146,17 @@ $(function() {
             }
         }
     });
+
+    function calculateRevenue() {
+        const pricePerCrate = Number($inputPricePerCrate.val()) || 0
+        const cratesSold = Number($inputCratesSold.val()) || 0
+        const revenue = (pricePerCrate * cratesSold).toFixed(2)
+        $disabledInputTotalRevenue.val(revenue)
+        $inputTotalRevenue.val(revenue)
+    }
+
+    $inputPricePerCrate.on('change keyup', () => calculateRevenue())
+    $inputCratesSold.on('change keyup', () => calculateRevenue())
 
 })
 </script>
