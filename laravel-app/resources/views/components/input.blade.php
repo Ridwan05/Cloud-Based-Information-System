@@ -34,7 +34,5 @@
     @endif
     {!! Form::$type($name, $value, $inputAttributes) !!}
 
-    @error($name)
-        <div class="invalid-feedback">{{ $message  }}</div>
-    @enderror
+    <x-field-error :name="$name" />
 </div>

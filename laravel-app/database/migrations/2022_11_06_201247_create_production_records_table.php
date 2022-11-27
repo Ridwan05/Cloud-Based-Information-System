@@ -46,7 +46,7 @@ return new class extends Migration
                 ->nullable()
                 ->default(0);
                 
-            $table->integer('crates_of_eggs_produced', false, true)
+            $table->decimal('crates_of_eggs_produced', 12, 2, true)
                 ->comment('Amount of crates of eggs produced for the day')
                 ->nullable()
                 ->default(0);

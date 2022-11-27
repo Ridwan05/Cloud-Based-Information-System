@@ -2,7 +2,15 @@
     'record'
 ])
 
-@if (empty($record->id))
+
+@php
+    $isEdit = !empty($record->id);
+    $totalFeedCost = $isEdit
+        ? $record->total_feed_cost
+        : old('total_feed_cost')
+@endphp
+
+@if (!$isEdit)
     {!! Form::open([
         'route' => 'production_records.store',
         'id' => 'production-form',
@@ -19,6 +27,7 @@
     !!}
 @endif
 
+
     <div class="form_group">
         <x-input name="date_recorded" label="Date" type="date" :value="!empty($record->id) ? $record->date_recorded->format('Y-m-d') : null" required />
     </div>
@@ -28,15 +37,45 @@
     </div>
 
     <div class="form_group">
-        <x-input name="feed_consumed_bags" label="Feeds (in bags)" type="number" min="1" required />
+        <x-input
+            name="feed_consumed_bags"
+            id="feed_consumed_bags"
+            label="Feeds (in bags)"
+            type="number"
+            min="1"
+            required
+        />
     </div>
 
     <div class="form_group">
-        <x-input name="feed_price_per_bag" label="Feed Price per bag (in naira)" type="number" min="1" step="0.01" required />
+        <x-input
+            name="feed_price_per_bag"
+            id="feed_price_per_bag"
+            label="Feed Price per bag (in naira)"
+            type="number"
+            min="1"
+            step="0.01"
+            required
+        />
     </div>
 
     <div class="form_group">
-        <x-input name="total_feed_cost" label="Cost of Feeds (Naira)" type="number" min="1" step="0.01" required />
+        <x-input
+            name="disabled_total_feed_cost"
+            id="disabled_total_feed_cost"
+            label="Cost of Feeds (Naira)"
+            class="bg-white"
+            type="number"
+            :value="$totalFeedCost"
+            min="1"
+            step="0.01"
+            disabled
+            required
+        />
+        <x-input-hidden
+            name="total_feed_cost"
+            id="total_feed_cost"
+        />
     </div>
 
     <div class="form_group">
@@ -52,11 +91,25 @@
     </div>
 
     <div class="form_group">
-        <x-input name="units_of_eggs_produced" label="Numbers of Eggs Produced" type="number" min="1" required />
+        <x-input name="units_of_eggs_produced" id="units_of_eggs_produced" label="Numbers of Eggs Produced" type="number" min="1" required />
     </div>
-
+    
     <div class="form_group">
-        <x-input name="crates_of_eggs_produced" label="Numbers of Crates" type="number" min="0" />
+        <x-input
+            name="crates_of_eggs_produced"
+            id="disabled_crates_of_eggs_produced"
+            label="Numbers of Crates"
+            type="number"
+            class="bg-white"
+            min="0"
+            readonly
+            required
+        />
+        <x-input-hidden
+            name="crates_of_eggs_produced"
+            id="crates_of_eggs_produced"
+        />
+        <x-field-error name="crates_of_eggs_produced" />
     </div>
 
     <div class="form_group">
@@ -81,7 +134,16 @@
 <script>
 $(function() {
     let $btnSubmit = $('#submit-button')
-    $("#production-form").validate({
+    let $inputNumberOfEggs = $('#units_of_eggs_produced')
+    let $inputNumberOfCrates = $('#disabled_crates_of_eggs_produced')
+    let $hiddenInputNumberOfCrates = $('#crates_of_eggs_produced')
+    
+    let $inputFeedConsumedBags = $('#feed_consumed_bags')
+    let $inputFeedPricePerBag = $('#feed_price_per_bag')
+    let $inputTotalFeedCost = $('#disabled_total_feed_cost')
+    let $hiddenInputTotalFeedCost = $('#total_feed_cost')
+
+    const validator = $("#production-form").validate({
         submitHandler: function(form) {
             $btnSubmit.attr('disabled', true)
             form.submit();
@@ -111,11 +173,6 @@ $(function() {
                 min: 1,
                 max: 99999999,
             },
-            total_feed_cost: {
-                required: true,
-                min: 1,
-                max: 99999999,
-            },
             payable_to_supplier: {
                 required: false,
                 min: 0,
@@ -136,11 +193,6 @@ $(function() {
                 min: 1,
                 max: 99999999,
             },
-            crates_of_eggs_produced: {
-                required: true,
-                min: 0,
-                max: 9999999,
-            },
             number_of_cracked_eggs: {
                 required: true,
                 min: 0,
@@ -156,6 +208,26 @@ $(function() {
             }
         }
     });
+
+    function calculateNumberOfCrates() {
+        let numberOfEggs = Number($inputNumberOfEggs.val()) || 0
+        let numberOfCrates = !numberOfEggs ? 0 : (numberOfEggs / 30).toFixed(1)
+        $inputNumberOfCrates.val(numberOfCrates)
+        $hiddenInputNumberOfCrates.val(numberOfCrates)
+        console.log(`Number of crates: ${numberOfCrates}`)
+    }
+
+    function calculateTotalFeedCost() {
+        const numberOfBags = Number($inputFeedConsumedBags.val()) || 0
+        const pricePerBag = Number($inputFeedPricePerBag.val()) || 0
+        const totalFeedCost = (numberOfBags * pricePerBag).toFixed(2)
+        $inputTotalFeedCost.val(totalFeedCost)
+        $hiddenInputTotalFeedCost.val(totalFeedCost)
+    }
+
+    $inputNumberOfEggs.on('change keyup', () => calculateNumberOfCrates())
+    $inputFeedConsumedBags.on('change keyup', () => calculateTotalFeedCost())
+    $inputFeedPricePerBag.on('change keyup', () => calculateTotalFeedCost())
 
 })
 </script>

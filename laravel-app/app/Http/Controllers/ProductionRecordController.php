@@ -27,7 +27,6 @@ class ProductionRecordController extends Controller
      */
     public function store(SaveProductionRecordRequest $request)
     {
-        $
         $record = ProductionRecord::create($request->validated());
 
         if (empty($record->id)) {

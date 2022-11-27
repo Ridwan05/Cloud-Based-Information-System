@@ -17,7 +17,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (authUserIsAdmin()) {
+        if (!authUserIsAdmin()) {
             return redirect(RouteServiceProvider::HOME);
         }
         return $next($request);
