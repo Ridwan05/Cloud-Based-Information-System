@@ -1,8 +1,27 @@
-{!! Form::open([
-    'route' => 'users.store',
-    'id' => 'user-form',
-    'novalidate',
-]) !!}
+@props([
+    'user' => null,
+])
+
+@php
+    $isEdit = !empty($user->id);
+@endphp
+
+@if (!$isEdit)
+    {!! Form::open([
+        'route' => 'users.store',
+        'id' => 'user-form',
+        'novalidate',
+    ]) !!}
+@else
+    {!!
+        Form::model($user, [
+            'method' => 'PUT',
+            'route' => ['users.update', $user->id],
+            'id' => 'user-form',
+            'novalidate',
+        ])
+    !!}
+@endif
     <div class="row">
         <div class="col-md-6 mx-auto">
             <div class="form_group">
@@ -14,18 +33,20 @@
             </div>
 
             <div class="form_group">
-                <x-input name="password" label="Password" type="text" minlength="6" />
+                <x-input-password name="password" :label="$isEdit ? 'New Password (optional)' : 'Password'" type="text" minlength="6" />
             </div>
 
-            <div class="form_group">
-                <label>
-                    {!! Form::checkbox('is_admin', true) !!}
+            @if (!$isEdit || !isAuthUser($user))
+                <div class="form_group">
+                    <label>
+                        {!! Form::checkbox('is_admin', true) !!}
 
-                    <span class="ms-2">
-                        Set as admin
-                    </span>
-                </label>
-            </div>
+                        <span class="ms-2">
+                            Set as admin
+                        </span>
+                    </label>
+                </div>
+            @endif
             
             <div class="form_group">
                 <button class="btn button" type="submit" id="submit-button">Submit</button>
@@ -54,7 +75,7 @@ $(function() {
                 email: true,
             },
             password: {
-                required: true,
+                @if (!$isEdit) required: true @endif,
                 minlength: 6,
                 maxlength: 50,
             },

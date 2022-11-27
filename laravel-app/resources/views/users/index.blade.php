@@ -36,7 +36,9 @@
                             <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
                             <td>{{ $user->email }}</td>
                             <td class="text-end">
-
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm">
+                                    Edit
+                                </a>
                             </td>
                         </tr>
                     @endforeach

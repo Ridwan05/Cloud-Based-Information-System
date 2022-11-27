@@ -93,7 +93,7 @@ Route::prefix('sales-records')
     
 Route::prefix('users')
     ->name('users.')
-    ->middleware('auth')
+    ->middleware(['auth', 'admin'])
     ->group(function() {
         Route::get('index', [UserController::class, 'index'])
             ->name('index');
@@ -103,4 +103,10 @@ Route::prefix('users')
 
         Route::post('store', [UserController::class, 'store'])
             ->name('store');
+
+        Route::get('edit/{id}', [UserController::class, 'edit'])
+            ->name('edit');
+
+        Route::put('update/{id}', [UserController::class, 'update'])
+            ->name('update');
     });

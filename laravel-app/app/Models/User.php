@@ -48,9 +48,10 @@ class User extends Authenticatable
     /**
      * Get validation rules for checking records for savaing to the user table
      *
+     * @param  ?int  $id
      * @return array
      */
-    public static function validationRules(): array
+    public static function validationRules(?int $id = null): array
     {
         $emailUniqueRule = Rule::unique('users');
 
@@ -60,9 +61,22 @@ class User extends Authenticatable
             $emailUniqueRule,
         ];
 
+        $passwordRules = [
+            'required',
+            'string',
+            'min:6',
+            'max:50'
+        ];
+
+        if (!is_null($id)) {
+            $passwordRules[0] = 'sometimes';
+            $passwordRules[1] = 'nullable';
+            $emailUniqueRule->ignore((int) $id);
+        }
+
         $rules = [
             'name' => 'required|string|min:3|max:50',
-            'password' => 'required|string|min:6|max:50',
+            'password' => $passwordRules,
             'email' => $emailRules,
             'is_admin' => 'sometimes|boolean',
         ];
