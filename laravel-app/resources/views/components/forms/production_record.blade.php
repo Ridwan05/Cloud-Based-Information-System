@@ -201,17 +201,17 @@ $(function() {
             payable_to_supplier: {
                 required: false,
                 min: 0,
-                max: 99999999,
+                max: 9999999999,
             },
             other_expenses: {
                 required: true,
                 min: 0,
-                max: 99999999,
+                max: 9999999999,
             },
             units_of_eggs_produced: {
                 required: true,
                 min: 1,
-                max: 99999999,
+                max: 9999999999,
             },
             number_of_cracked_eggs: {
                 required: true,

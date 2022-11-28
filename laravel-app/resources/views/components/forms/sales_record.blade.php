@@ -131,15 +131,23 @@ $(function() {
             },
             price_per_crate: {...quantityValidationRules},
             crates_sold: {...quantityValidationRules},
-            outstanding_balance: {...quantityValidationRules},
-            balance_payment: {...quantityValidationRules},
+            outstanding_balance: {
+                ...quantityValidationRules,
+                max: 9999999999,
+            },
+            balance_payment: {
+                ...quantityValidationRules,
+                max: 9999999999,
+            },
             cash_transfer_to_production: {
                 ...quantityValidationRules,
                 min: 0,
+                max: 9999999999,
             },
             bank_deposit: {
                 ...quantityValidationRules,
                 min: 0,
+                max: 9999999999,
             },
             comments: {
                 maxlength: 1000,
