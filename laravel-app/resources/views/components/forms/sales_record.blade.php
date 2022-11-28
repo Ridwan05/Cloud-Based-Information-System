@@ -43,7 +43,7 @@
         <x-input
             name="crates_sold"
             id="crates_sold"
-            label="Sales (in naira)"
+            label="Sales (crates)"
             type="number"
             min="1"
             required
