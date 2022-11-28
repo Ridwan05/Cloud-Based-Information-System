@@ -52,7 +52,7 @@ class SalesRecord extends Model
             'outstanding_balance' => 'required|numeric|min:1|max:9999999999',
             'balance_payment' => 'required|numeric|min:1|max:9999999999',
             'cash_transfer_to_production' => 'required|numeric|min:1|max:9999999999',
-            'bank_deposit' => 'required|numeric|min:1|max:999999',
+            'bank_deposit' => 'required|numeric|min:1|max:9999999999',
             'comments' => 'nullable|string|max:1000',
         ];
 

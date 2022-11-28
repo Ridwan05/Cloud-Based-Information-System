@@ -20,23 +20,23 @@ return new class extends Migration
             $table->decimal('feed_consumed_bags', 7, 2, true)
                 ->comment('Quantity of feed consumed for the day, measured in bags');
 
-            $table->decimal('feed_price_per_bag', 12, 2, true)
+            $table->decimal('feed_price_per_bag', 15, 2, true)
                 ->comment('purchase price of each of the bags consumed');
 
-            $table->decimal('total_feed_cost', 12, 2, true)
+            $table->decimal('total_feed_cost', 15, 2, true)
                 ->comment('Total amount spent on feeds');
 
-            $table->decimal('payable_to_supplier', 12, 2, true)
+            $table->decimal('payable_to_supplier', 15, 2, true)
                 ->comment('Amount owed to suppliers for the day')
                 ->nullable()
                 ->default(0);
 
-            $table->decimal('other_expenses', 12, 2, true)
+            $table->decimal('other_expenses', 15, 2, true)
                 ->comment('Other production expenses incurred outside feed cost')
                 ->nullable()
                 ->default(0);
 
-            $table->decimal('total_expenses', 12, 2, true)
+            $table->decimal('total_expenses', 15, 2, true)
                 ->comment('Total amount expended in production for the day')
                 ->nullable()
                 ->default(0);
@@ -46,7 +46,7 @@ return new class extends Migration
                 ->nullable()
                 ->default(0);
                 
-            $table->decimal('crates_of_eggs_produced', 12, 2, true)
+            $table->decimal('crates_of_eggs_produced', 15, 2, true)
                 ->comment('Amount of crates of eggs produced for the day')
                 ->nullable()
                 ->default(0);

@@ -59,6 +59,7 @@
             min="1"
             step="0.01"
             required
+            readonly
         />
         <x-input-hidden
             name="total_revenue"
